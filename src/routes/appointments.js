@@ -32,7 +32,7 @@ module.exports = (db, updateAppointment) => {
       return;
     }
 
-    const { student, interviewer } = request.body.interview;
+    const { student, interviewer } = request.body;
 
     db.query(
       `
@@ -45,7 +45,7 @@ module.exports = (db, updateAppointment) => {
       .then(() => {
         setTimeout(() => {
           response.status(204).json({});
-          updateAppointment(Number(request.params.id), request.body.interview);
+          updateAppointment(Number(request.params.id), request.body);
         }, 1000);
       })
       .catch(error => console.log(error));
